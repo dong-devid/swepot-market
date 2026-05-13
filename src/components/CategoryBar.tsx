@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 
 const categories = [
   { id: 'all', label: '전체', emoji: '🏠' },
@@ -14,7 +14,22 @@ const categories = [
 ]
 
 export default function CategoryBar() {
-  const [active, setActive] = useState('all')
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const currentCategory = searchParams.get('category') ?? 'all'
+
+  function handleCategory(id: string) {
+    const params = new URLSearchParams(searchParams.toString())
+    params.delete('page')
+    if (id === 'all') {
+      params.delete('category')
+    } else {
+      params.set('category', id)
+    }
+    router.replace(`${pathname}?${params.toString()}`)
+  }
 
   return (
     <div className="bg-white border-b border-gray-100">
@@ -22,10 +37,10 @@ export default function CategoryBar() {
         {categories.map((cat) => (
           <button
             key={cat.id}
-            onClick={() => setActive(cat.id)}
+            onClick={() => handleCategory(cat.id)}
             className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all
-              ${active === cat.id
-                ? 'bg-orange-500 text-white shadow-sm shadow-orange-200'
+              ${currentCategory === cat.id
+                ? 'bg-goguma-500 text-white shadow-sm shadow-goguma-200'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
           >

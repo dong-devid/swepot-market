@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Heart, MessageCircle } from 'lucide-react'
 import { Product } from '@/lib/supabase'
 
@@ -12,7 +13,7 @@ function timeAgo(dateStr: string) {
 }
 
 const statusBadge = {
-  '예약중': 'bg-gray-700 text-white',
+  '예약중': 'bg-goguma-500 text-white',
   '판매완료': 'bg-gray-400 text-white',
   '판매중': '',
 }
@@ -21,7 +22,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const isSoldOut = product.status === '판매완료'
 
   return (
-    <div className="group bg-white rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer overflow-hidden flex gap-3 p-4">
+    <Link href={`/products/${product.id}`} className="group bg-white rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer overflow-hidden flex gap-3 p-4">
       {/* 썸네일 */}
       <div className="relative flex-shrink-0 w-[110px] h-[110px] rounded-xl overflow-hidden bg-gray-100">
         {product.image_url ? (
@@ -66,6 +67,6 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

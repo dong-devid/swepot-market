@@ -27,6 +27,9 @@ yarn-error.log*
 .env*.local
 .env
 
+# MCP (contains secrets)
+.mcp.json
+
 # vercel
 .vercel
 

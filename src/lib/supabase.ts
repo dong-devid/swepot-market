@@ -13,5 +13,6 @@ export type Product = {
   image_url: string
   seller_name: string
   status: '판매중' | '예약중' | '판매완료'
+  category: string | null
   created_at: string
 }

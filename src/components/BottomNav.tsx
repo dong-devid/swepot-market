@@ -8,7 +8,7 @@ const navItems = [
   { id: 'town', label: '동네생활', icon: FileText },
   { id: 'near', label: '내 근처', icon: MapPin },
   { id: 'chat', label: '채팅', icon: MessageCircle },
-  { id: 'my', label: '나의 당근', icon: User },
+  { id: 'my', label: '나의 고구마', icon: User },
 ]
 
 export default function BottomNav() {
@@ -22,7 +22,7 @@ export default function BottomNav() {
             key={id}
             onClick={() => setActive(id)}
             className={`flex-1 flex flex-col items-center gap-1 py-2.5 transition-colors
-              ${active === id ? 'text-orange-500' : 'text-gray-400 hover:text-gray-600'}`}
+              ${active === id ? 'text-goguma-500' : 'text-gray-400 hover:text-gray-600'}`}
           >
             <Icon size={22} strokeWidth={active === id ? 2.5 : 1.8} />
             <span className="text-[10px] font-medium">{label}</span>
