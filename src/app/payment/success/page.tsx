@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { CheckCircle2, Loader2 } from 'lucide-react'
 
-export default function PaymentSuccessPage() {
+function SuccessContent() {
   const searchParams = useSearchParams()
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading')
   const [errorMsg, setErrorMsg] = useState('')
@@ -64,7 +64,6 @@ export default function PaymentSuccessPage() {
         <CheckCircle2 size={56} className="text-goguma-500 mx-auto mb-4" />
         <h1 className="font-bold text-2xl text-gray-900 mb-2">결제 완료!</h1>
         <p className="text-sm text-gray-400 mb-8">고구마마켓 구매가 완료되었어요 🥔</p>
-
         <div className="bg-gray-50 rounded-2xl px-4 py-4 text-left space-y-3 mb-8">
           <div className="flex justify-between text-sm">
             <span className="text-gray-400">결제 금액</span>
@@ -74,19 +73,23 @@ export default function PaymentSuccessPage() {
             <span className="text-gray-400">주문 번호</span>
             <span className="font-medium text-gray-700 text-xs break-all">{orderId}</span>
           </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-400">결제 키</span>
-            <span className="font-medium text-gray-700 text-xs break-all truncate max-w-[160px]">{paymentKey}</span>
-          </div>
         </div>
-
-        <Link
-          href="/"
-          className="block w-full py-3.5 rounded-2xl bg-goguma-500 text-white font-bold text-[16px] hover:bg-goguma-600 transition-colors"
-        >
+        <Link href="/" className="block w-full py-3.5 rounded-2xl bg-goguma-500 text-white font-bold text-[16px] hover:bg-goguma-600 transition-colors">
           홈으로 돌아가기
         </Link>
       </div>
     </div>
+  )
+}
+
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-[#F8F8F7]">
+        <Loader2 size={40} className="animate-spin text-goguma-500" />
+      </div>
+    }>
+      <SuccessContent />
+    </Suspense>
   )
 }
