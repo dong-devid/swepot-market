@@ -163,9 +163,17 @@ export default async function ProductDetailPage({
                 판매완료
               </button>
             ) : (
-              <button className="px-6 py-2.5 rounded-xl bg-goguma-500 text-white font-semibold text-[15px] hover:bg-goguma-600 active:scale-95 transition-all shadow-sm shadow-goguma-200">
-                채팅하기
-              </button>
+              <div className="flex gap-2">
+                <button className="px-4 py-2.5 rounded-xl border border-goguma-300 text-goguma-600 font-semibold text-[15px] hover:bg-goguma-50 transition-colors">
+                  채팅
+                </button>
+                <Link
+                  href={`/products/${product.id}/pay`}
+                  className="px-5 py-2.5 rounded-xl bg-goguma-500 text-white font-semibold text-[15px] hover:bg-goguma-600 active:scale-95 transition-all shadow-sm shadow-goguma-200"
+                >
+                  구매하기
+                </Link>
+              </div>
             )}
           </div>
         </div>
